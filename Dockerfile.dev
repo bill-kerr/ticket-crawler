@@ -1,0 +1,6 @@
+FROM buildkite/puppeteer
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci --quiet
+COPY ./ ./
+ENTRYPOINT ["npm", "run", "dev"]
