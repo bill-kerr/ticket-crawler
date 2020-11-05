@@ -7,7 +7,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { Task } from './task';
+import { Task } from '../tasks/task';
 
 @Entity()
 export class Recipient extends BaseEntity {

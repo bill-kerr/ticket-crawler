@@ -1,3 +1,4 @@
+import { CronJob } from 'cron';
 import {
   BaseEntity,
   Column,
@@ -7,7 +8,12 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { Recipient } from './recipient';
+import { Recipient } from '../recipients/recipient';
+
+export interface ScheduledTask {
+  task: Task;
+  job: CronJob;
+}
 
 @Entity()
 export class Task extends BaseEntity {
