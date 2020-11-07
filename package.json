@@ -5,7 +5,7 @@
   "author": "Bill Kerr",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon --exec ts-node --files src/index.ts",
+    "dev": "nodemon --legacy-watch --exec ts-node --files src/index.ts",
     "test": "set NODE_ENV=test && jest --watchAll --no-cache"
   },
   "jest": {
@@ -23,6 +23,8 @@
     "date-fns": "^2.16.1",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "express-async-errors": "^3.1.1",
+    "firebase-admin": "^9.3.0",
     "helmet": "^4.2.0",
     "pg": "^8.4.2",
     "typeorm": "^0.2.29"
