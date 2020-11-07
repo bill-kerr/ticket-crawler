@@ -12,6 +12,7 @@ import { connectDatabase } from './database';
 import { initFirebase } from './auth/firebase';
 import { requireAuth } from './auth/require-auth';
 import { errorHandler } from './errors/error-handler';
+import { authRouter } from './auth/routes';
 
 async function startApp() {
   const app = express();
@@ -27,6 +28,7 @@ async function startApp() {
 
   const v1 = express.Router();
   v1.use('/tasks', taskRouter);
+  v1.use('/auth', authRouter);
   app.use('/api/v1', v1);
 
   app.use(errorHandler);
