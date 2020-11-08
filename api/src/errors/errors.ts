@@ -14,7 +14,22 @@ export class NotAuthorizedError extends BaseError {
     Object.setPrototypeOf(this, NotAuthorizedError.prototype);
   }
 
-  serialize() {
-    return [this.error];
+  serialize = () => [this.error];
+}
+
+export class NotFoundError extends BaseError {
+  statusCode = HttpResponseCode.NOT_FOUND;
+  error: SerializedError = {
+    object: 'error-detail',
+    title: 'Not found',
+    detail: '',
+  };
+
+  constructor(message = 'The requested resource was not found.') {
+    super(message);
+    this.error.detail = message;
+    Object.setPrototypeOf(this, NotFoundError.prototype);
   }
+
+  serialize = () => [this.error];
 }

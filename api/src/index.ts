@@ -6,7 +6,6 @@ import cors from 'cors';
 import { json } from 'body-parser';
 import 'express-async-errors';
 import config from './config';
-import { scheduleTasks } from './scheduler';
 import { taskRouter } from './tasks/routes';
 import { connectDatabase } from './database';
 import { initFirebase } from './auth/firebase';
@@ -22,7 +21,6 @@ async function startApp() {
 
   await connectDatabase();
   initFirebase();
-  await scheduleTasks();
 
   app.use(requireAuth);
 

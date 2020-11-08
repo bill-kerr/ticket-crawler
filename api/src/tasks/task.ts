@@ -1,3 +1,4 @@
+import { Exclude } from 'class-transformer';
 import { CronJob } from 'cron';
 import {
   BaseEntity,
@@ -34,6 +35,10 @@ export class Task extends BaseEntity {
 
   @Column()
   notifyOnError: boolean;
+
+  @Column()
+  @Exclude()
+  userId: string;
 
   @OneToMany(() => Recipient, recipient => recipient.task)
   recipients: Recipient[];
