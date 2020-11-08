@@ -19,14 +19,15 @@ services:
     volumes:
       - /app/node_modules
       - ./api:/app
-  client:
-    depends_on:
-      - api
-    build:
-      context: ./client
-      dockerfile: Dockerfile.dev
-    ports:
-      - 5000:5000
-    volumes:
-      - /app/node_modules
-      - ./client:/app
+  # client:
+  #   depends_on:
+  #     - api
+  #   build:
+  #     context: ./client
+  #     dockerfile: Dockerfile.dev
+  #   ports:
+  #     - 5000:5000
+  #     - 35729:35729
+  #   volumes:
+  #     - /app/node_modules
+  #     - ./client:/app

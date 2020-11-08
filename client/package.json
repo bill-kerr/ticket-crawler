@@ -5,7 +5,7 @@
     "build": "set NODE_ENV=production && rollup -c",
     "watch:css": "postcss public/tailwind.css -o public/styles.css -w",
     "build:css": "set NODE_ENV=production && postcss public/tailwind.css -o public/styles.css",
-    "dev": "rollup -c -w",
+    "dev": "rollup -c --watch",
     "start": "sirv public",
     "validate": "svelte-check"
   },
@@ -15,6 +15,7 @@
     "@rollup/plugin-typescript": "^6.0.0",
     "@tsconfig/svelte": "^1.0.0",
     "autoprefixer": "^9.8.6",
+    "postcss": "^8.1.6",
     "postcss-cli": "^8.2.0",
     "rollup": "^2.3.4",
     "rollup-plugin-livereload": "^2.0.0",
@@ -28,6 +29,7 @@
     "typescript": "^3.9.3"
   },
   "dependencies": {
+    "firebase": "^8.0.1",
     "sirv-cli": "^1.0.0"
   }
 }
