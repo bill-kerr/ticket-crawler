@@ -52,6 +52,24 @@ POSTGRES_DB=                  # Database name to use for storing ticket records.
 
 3. Launch the application with `docker-compose up -d`.
 
+4. OPTIONAL: You may use the prebuilt Docker image hosted on DockerHub at bk7987/ticket-crawler. You must still provide configuration files and a database image. I suggest using your own docker-compose.yml file similar to the following:
+
+```
+version: 3.3
+
+services:
+  db:
+    image: postgres:12
+    env_file:
+      - db.env
+  crawler:
+    image: bk7987/ticket-crawler
+    env_file:
+      - .env
+```
+
+Then simply run `docker-compose up --build -d`.
+
 ## How it's built
 
 Ticket Crawler is written completely in Typescript and runs inside of two Docker containers. The first container contains all of the application logic and the second contains the database which holds application data.
@@ -60,7 +78,7 @@ The application begins by intiating a CRON job that runs on a predefined interva
 
 The task starts by first launching a [Puppeteer](https://github.com/puppeteer/puppeteer) process, which crawls the FleetWatcher website for tickets generated on the previous day. When the tickets for a particular day are found, a request to download the PDF containing all of the tickets is intercepted by Ticket Crawler, which attaches all required Auth headers and sends the request to the FleetWatcher endpoint. The response data (PDF file) is piped directly to an S3 bucket.
 
-Once the pdf file is saved to AWS S3 storage, it is read by a pdf parser and split into individual tickets, which are saved to the database. The parser extracts all required information from each page of the PDF and creates new tickets with the appropriate data.
+Once the PDF file is saved to AWS S3 storage, it is read by a PDF parser and split into individual tickets, which are saved to the database. The parser extracts all required information from each page of the PDF and creates new tickets with the appropriate data.
 
 These ticket data objects, along with their source PDF file, are then used to create separate PDF files based on the ticket material. Each file will be named based on the date and material and will contain all of the tickets for the given material. These files will then be added to the AWS S3 bucket, prepended with a path matching the material name.
 
