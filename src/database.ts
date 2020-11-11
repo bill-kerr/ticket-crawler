@@ -1,14 +1,13 @@
 import 'reflect-metadata';
 import { createConnection } from 'typeorm';
 import config from './config';
-import { Recipient } from './recipients/recipient';
-import { Task } from './tasks/task';
+import { Ticket } from './ticket';
 
 export function connectDatabase() {
   return createConnection({
     type: 'postgres',
     url: config.pgConnString,
-    entities: [Task, Recipient],
+    entities: [Ticket],
     synchronize: true,
   });
 }

@@ -1,6 +1,7 @@
 import dotenv from 'dotenv';
 dotenv.config();
 import { createConnection } from 'typeorm';
+import { Ticket } from '../src/ticket';
 
 beforeAll(async () => {
   await createConnection({
@@ -9,6 +10,7 @@ beforeAll(async () => {
     dropSchema: true,
     synchronize: true,
     logging: false,
+    entities: [Ticket],
     name: 'default',
   });
 });

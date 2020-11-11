@@ -10,24 +10,12 @@ services:
     depends_on:
       - db
     build:
-      context: ./api
+      context: .
       dockerfile: Dockerfile.dev
     ports:
       - 3333:3333
     env_file:
-      - ./api/dev.env
+      - ./dev.env
     volumes:
       - /app/node_modules
-      - ./api:/app
-  # client:
-  #   depends_on:
-  #     - api
-  #   build:
-  #     context: ./client
-  #     dockerfile: Dockerfile.dev
-  #   ports:
-  #     - 5000:5000
-  #     - 35729:35729
-  #   volumes:
-  #     - /app/node_modules
-  #     - ./client:/app
+      - .:/app
