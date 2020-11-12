@@ -63,12 +63,19 @@ version: '3.3'
 services:
   db:
     image: postgres:12
+    restart: always
     env_file:
       - db.env
+    volumes:
+      - pgdata:/var/lib/postgresql/data
   crawler:
     image: bk7987/ticket-crawler
+    restart: always
     env_file:
       - .env
+      
+volumes:
+  pgdata:
 ```
 
 Then simply run `docker-compose up --build -d`.
