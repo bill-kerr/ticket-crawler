@@ -10,6 +10,8 @@ export default {
   closeBrowser: (process.env.CLOSE_BROWSER || '').toLowerCase() !== 'false',
 
   ticketCron: process.env.TICKET_CRON || '0 15 0 * * *',
+  retryDelay: parseInt(process.env.RETRY_DELAY || '60000', 10),
+  maxRetries: parseInt(process.env.MAX_RETRIES || '5', 10),
   cronTimezone: process.env.CRON_TIMEZONE || 'America/New_York',
 
   fwUsername: process.env.FW_USERNAME || '',

@@ -6,7 +6,7 @@ services:
     environment:
       - POSTGRES_DB=tickets
       - POSTGRES_PASSWORD=password
-  api:
+  crawler:
     depends_on:
       - db
     build:

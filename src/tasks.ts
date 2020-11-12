@@ -9,9 +9,26 @@ import { createPdfs } from './pdf';
 import { getFile } from './storage';
 
 export function scheduleTask() {
-  const job = new CronJob(config.ticketCron, processTickets, null, false, config.cronTimezone);
+  const job = new CronJob(config.ticketCron, ticketTask, null, false, config.cronTimezone);
   job.start();
   return job;
+}
+
+async function ticketTask() {
+  for (let i = 0; i < config.maxRetries; i++) {
+    try {
+      await processTickets();
+    } catch (error) {
+      console.error(error);
+      await delay(config.retryDelay);
+      continue;
+    }
+    break;
+  }
+}
+
+function delay(ms: number) {
+  return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 async function processTickets() {

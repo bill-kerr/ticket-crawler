@@ -22,6 +22,9 @@ PDF_SPLIT_KEY=                # Text string used to split PDF pages. Use first u
 PDF_MUST_INCLUDE=             # String used to filter split text. Use a string that will appear on every ticket.
 
 TICKET_CRON=                  # How and when tickets are retrieved. A valid CRON conforming to the structure: "* * * * * *"
+CRON_TIMEZONE=                # A valid CRON timezone per (https://raw.githubusercontent.com/node-cron/tz-offset/master/generated/offsets.json)[this list].
+MAX_RETRIES=                  # Maximum number of times TicketCrawler will re-attempt a failed task execution.
+RETRY_DELAY=                  # Delay in milliseconds between retry attempts.
 
 S3_ACCESS_KEY=                # Access key for Amazon S3 storage.
 S3_SECRET_ACCESS_KEY=         # Secret access key for Amazon S3 storage.
