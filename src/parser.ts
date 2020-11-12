@@ -117,8 +117,8 @@ function filterTicket(ticket: Ticket, filter: PdfFilter): boolean {
   return false;
 }
 
-function tonsToPounds(strTons: string): number {
-  return parseInt(strTons.replace('.', '')) * 20;
+export function tonsToPounds(strTons: string): number {
+  return Math.round(parseFloat(strTons) * 2000);
 }
 
 function findWithNewline(txt: string, key: string): string {
@@ -165,10 +165,10 @@ function findLoadNumber(txt: string): number {
 }
 
 function findTotalPounds(txt: string): number {
-  const startPos = txt.search('Tons: ');
+  const startPos = txt.search('Tons:');
   const endPos = txt.slice(startPos).search('\n');
   const amountStr = verify(startPos, endPos)
-    ? txt.slice(startPos + 6, startPos + endPos).trim()
+    ? txt.slice(startPos + 5, startPos + endPos).trim()
     : '0';
   return tonsToPounds(amountStr);
 }

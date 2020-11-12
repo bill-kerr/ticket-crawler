@@ -40,7 +40,7 @@ async function generateTickets(page: Page, startDate: Date, endDate: Date) {
   const end = format(endDate, 'M/d/yyyy HH:mm');
   console.log(`Generating tickets from ${start} to ${end}...`);
 
-  await page.click('#id_ticket_start_date1', { clickCount: 3 });
+  await page.click('#id_ticket_start_date', { clickCount: 3 });
   await page.type('#id_ticket_start_date', start);
   await page.keyboard.press('Tab');
   await page.type('#id_ticket_end_date', end);
