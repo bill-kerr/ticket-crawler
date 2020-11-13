@@ -21,6 +21,17 @@ export async function sendMail(date: Date, filenames: string[]) {
   console.log('Emailed tickets to recipients...');
 }
 
+export async function sendErrorMail(error: string) {
+  const transporter = createTransporter();
+  await transporter.sendMail({
+    from: config.emailUsername,
+    to: config.errorEmailTargets,
+    subject: 'TicketCrawler: An error occurred while processing tickets.',
+    text: `The following error occurred while processing tickets:\n${error}`,
+  });
+  console.log('Emailed error message to recipients...');
+}
+
 function createTransporter() {
   return createTransport({
     host: config.emailServer,

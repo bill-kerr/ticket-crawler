@@ -25,6 +25,8 @@ TICKET_CRON=                  # How and when tickets are retrieved. A valid CRON
 CRON_TIMEZONE=                # A valid CRON timezone per (https://raw.githubusercontent.com/node-cron/tz-offset/master/generated/offsets.json)[this list].
 MAX_RETRIES=                  # Maximum number of times TicketCrawler will re-attempt a failed task execution.
 RETRY_DELAY=                  # Delay in milliseconds between retry attempts.
+SEND_EMAIL_ON_ERROR=          # If set to true, will send an email when MAX_RETRIES has been reached.
+ERROR_EMAIL_TARGETS=          # A comma seperated list of emails that defines the recipients of the error emails.
 
 S3_ACCESS_KEY=                # Access key for Amazon S3 storage.
 S3_SECRET_ACCESS_KEY=         # Secret access key for Amazon S3 storage.
@@ -73,7 +75,7 @@ services:
     restart: always
     env_file:
       - .env
-      
+
 volumes:
   pgdata:
 ```

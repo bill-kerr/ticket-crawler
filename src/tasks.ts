@@ -3,7 +3,7 @@ import addDuration from 'date-fns/add';
 import set from 'date-fns/set';
 import config from './config';
 import { getTickets } from './crawler';
-import { sendMail } from './messenger';
+import { sendMail, sendErrorMail } from './messenger';
 import { parsePdf } from './parser';
 import { createPdfs } from './pdf';
 import { getFile } from './storage';
@@ -21,6 +21,9 @@ async function ticketTask() {
     } catch (error) {
       console.error(error);
       await delay(config.retryDelay);
+      if (i === config.maxRetries - 1 && config.sendEmailOnError) {
+        await sendErrorMail(error);
+      }
       continue;
     }
     break;

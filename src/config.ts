@@ -10,9 +10,11 @@ export default {
   closeBrowser: (process.env.CLOSE_BROWSER || '').toLowerCase() !== 'false',
 
   ticketCron: process.env.TICKET_CRON || '0 15 0 * * *',
+  cronTimezone: process.env.CRON_TIMEZONE || 'America/New_York',
   retryDelay: parseInt(process.env.RETRY_DELAY || '60000', 10),
   maxRetries: parseInt(process.env.MAX_RETRIES || '5', 10),
-  cronTimezone: process.env.CRON_TIMEZONE || 'America/New_York',
+  sendEmailOnError: (process.env.SEND_EMAIL_ON_ERROR || 'false').toLowerCase() === 'true',
+  errorEmailTargets: (process.env.ERROR_EMAIL_TARGETS || '').split(','),
 
   fwUsername: process.env.FW_USERNAME || '',
   fwPassword: process.env.FW_PASSWORD || '',
