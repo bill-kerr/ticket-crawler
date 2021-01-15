@@ -6,7 +6,7 @@ import cors from 'cors';
 import { json } from 'body-parser';
 import config from './config';
 import { connectDatabase } from './database';
-import { scheduleTask } from './tasks';
+import { createTasks, scheduleTask } from './tasks';
 
 async function startApp() {
   const app = express();
@@ -21,7 +21,8 @@ async function startApp() {
     console.error(error);
   }
 
-  scheduleTask();
+  const tasks = createTasks();
+  tasks.forEach(task => scheduleTask(task));
 
   const port = config.port;
   app.listen(port, () => {
